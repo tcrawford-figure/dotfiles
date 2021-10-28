@@ -1,0 +1,43 @@
+format = """
+$kubernetes\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$docker_context\
+$package\
+$deno\
+$helm\
+$kotlin\
+$lua\
+$nodejs\
+$python\
+$red\
+$rust\
+$terraform\
+$vagrant\
+$nix_shell\
+$memory_usage\
+$env_var\
+$custom\
+$line_break\
+$time\
+$status\
+$shell\
+$character
+"""
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
