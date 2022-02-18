@@ -1,0 +1,31 @@
+[user]
+	email = "{{ .git_email }}"
+	name = "{{ .git_name }}"
+[alias]
+  a = !./gradlew ktlintFormat && git add .  
+  amend = commit --amend
+  br = branch
+  branches = branch -avv
+  clp = !git clean -n
+  co = checkout
+  cob = checkout -b
+  cod = checkout develop
+  delete = !sh -c 'git branch -D $1 && git push origin :$1' -
+  fo = fetch origin -p
+  gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
+  nuke = !git reset --hard origin/$(git branch --show-current)
+  nfo = !git nuke && git clean -fd
+  p = push
+  pl = pull
+  pf = push --force-with-lease 
+  pu = !git push -u origin $(git branch --show-current)
+  s = status -sb
+[fetch]
+  prune = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	editor = lvim
