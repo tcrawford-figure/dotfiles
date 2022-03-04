@@ -1,4 +1,5 @@
 # General
+alias r='cd ~/dev/figure/$(ls ~/dev/figure | fzf)'
 alias c="clear"
 alias ch="chezmoi"
 alias gw="./gradlew"
@@ -39,3 +40,13 @@ alias kn="kubens"
 alias kt="kc test"
 alias kp="kc prod"
 
+# dbenv
+alias pdbenv='eval "$(dbenv prod)"'
+alias tdbenv='eval "$(dbenv test)"'
+alias ldbenv='eval "$(dbenv local)"'
+alias udbenv='eval "$(dbenv unset)"'
+
+# cht.sh
+cht() {
+  curl cht.sh/"$1"/${2// /+}
+}

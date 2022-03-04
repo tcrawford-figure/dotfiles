@@ -12,6 +12,7 @@
   cod = checkout develop
   delete = !sh -c 'git branch -D $1 && git push origin :$1' -
   fo = fetch origin -p
+  fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
   gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
   nuke = !git reset --hard origin/$(git branch --show-current)
   nfo = !git nuke && git clean -fd
