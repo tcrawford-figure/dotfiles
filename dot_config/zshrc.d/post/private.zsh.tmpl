@@ -1,5 +1,5 @@
-{{- $nexusUser := (onepasswordDetailsFields "Okta - Figure").username.value -}}
-{{- $nexusPass := (onepasswordDetailsFields "Okta - Figure").password.value -}}
+{{- $nexusUser := (onepasswordDetailsFields "Local Nexus").username.value -}}
+{{- $nexusPass := (onepasswordDetailsFields "Local Nexus").password.value -}}
 ## Exports
 export NEXUS_USER={{ $nexusUser | quote }}
 export NEXUS_PASS={{ $nexusPass | quote }}
@@ -7,17 +7,17 @@ export NEXUS_HOST="nexus.figure.com"
 export NEXUS_NPM_TOKEN=$(echo -n $nexusUser:$nexusPass | openssl base64)
 
 ## Github Token
-{{ $terminalGithubToken := (onepassword "Terminal Github Token").details.password -}}
+{{ $terminalGithubToken := (onepasswordDetailsFields "Terminal Github Token").password.value -}}
 export GITHUB_TOKEN={{ $terminalGithubToken | quote}}
 
 ## Homebrew API token for private taps
-{{ $homebrewGithubToken := (onepassword "Homebrew Github Token").details.password -}}
+{{ $homebrewGithubToken := (onepasswordDetailsFields "Homebrew Github Token").password.value -}}
 export HOMEBREW_GITHUB_API_TOKEN={{ $homebrewGithubToken | quote }}
 
 ## Figure FE config
-{{ $percyToken := (onepassword "FE - Percy Token").details.password -}}
+{{ $percyToken := (onepasswordDetailsFields "FE - Percy Token").password.value -}}
 export PERCY_TOKEN={{ $percyToken }}
-{{ $cypressRecordKey := (onepassword "FE - Cypress Record Key").details.password -}}
+{{ $cypressRecordKey := (onepasswordDetailsFields "FE - Cypress Record Key").password.value -}}
 export CYPRESS_RECORD_KEY={{ $cypressRecordKey }}
 export NODE_ENV=development
 export BABEL_ENV=$NODE_ENV

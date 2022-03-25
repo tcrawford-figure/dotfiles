@@ -14,6 +14,7 @@ ENABLE_CORRECTION="false"
 plugins=(
   aliases
   git
+  gh
   brew
   zsh-autosuggestions
   zsh-syntax-highlighting

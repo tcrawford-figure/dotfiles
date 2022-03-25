@@ -9,3 +9,4 @@ path=(
     $HOME/dev/scripts/helper-scripts/bin
     $path
 )
+

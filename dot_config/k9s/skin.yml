@@ -1,0 +1,147 @@
+# Nord Dark Ambiance theme
+
+# Poloar Night
+## Background
+nord0: &nord0 "#2E3440"
+## Panels, modals, buttons, focused UI elements
+nord1: &nord1 "#3B4252"
+## Selection, text highlighting color
+nord2: &nord2 "#434C5E"
+## Comments, invisible/non-printable characters
+nord3: &nord3 "#4C566A" 
+
+# Snow Storm
+## Text editor caret, text color for variables, constants, etc
+nord4: &nord4 "#D8DEE9"
+## Inconspicuous UI text elements, also state animations
+nord5: &nord5 "#E5E9F0"
+## Plain text
+nord6: &nord6 "#ECEFF4"
+
+# Frost
+## Accent nord8, UI elements requiring visual attention
+nord7: &nord7 "#8FBCBB"
+## Used for primary UI elements that require the most visual attention
+nord8: &nord8 "#88C0D0"
+## Secondary UI elements
+nord9: &nord9 "#81A1C1"
+## Tertiary UI elements
+nord10: &nord10 "#5E81AC"
+
+# Aurora
+## Error states
+nord11: &nord11 "#BF616A"
+## More advanced dangerous functionality
+nord12: &nord12 "#D08770"
+## Warning states
+nord13: &nord13 "#EBCB8B"
+## Success states
+nord14: &nord14 "#A3BE8C"
+## Uncommon functionality
+nord15: &nord15 "#B48EAD"
+
+foreground: &foreground "#ECEFF4"
+background: &background "#2E3440"
+selection: &selection "#434C5E"
+comment: &comment "#4C566A"
+cyan: &cyan "#88C0D0"
+blue: &blue "#81A1C1"
+red: &red "#BF616A"
+orange: &orange "#D08770"
+yellow: &yellow ""#EBCB8B"
+green: &green "#A3BE8C"
+magenta: &magenta "#B48EAD"
+
+k9s:
+  # General K9s styles
+  body:
+    fgColor: *foreground
+    bgColor: *background
+    logoColor: *magenta
+  prompt:
+    fgColor: *foreground
+    bgColor: *background
+    suggestColor: *comment
+  help:
+    fgColor: *foreground
+    bgColor: *background
+    sectionColor: *cyan
+    keyColor: *blue
+    numKeyColor: *magenta
+    indicator:
+      fgColor: *red
+  frame:
+    border:
+      fgColor: *selection
+      focusColor: *selection
+    menu:
+      fgColor: *foreground
+      keyColor: *blue # secondary color
+      numKeyColor: *cyan # primary color
+    crumbs:
+      fgColor: *foreground
+      bgColor: *selection
+      activeColor: *nord10
+    # TODO: Come back to this
+    status:
+      newColor: *cyan
+      modifyColor: *magenta
+      addColor: *green
+      errorColor: *red
+      pendingColor: *orange # wat do?
+      highlightColor: *orange
+      killColor: *comment
+      completedColor: *comment
+    title:
+      fgColor: *foreground
+      bgColor: *background
+      highlightColor: *cyan
+      counterColor: *magenta
+      filterColor: *blue
+  info:
+    fgColor: *blue
+    sectionColor: *foreground
+  views:
+    table:
+      fgColor: *foreground
+      bgColor: *background
+      cursorFgColor: *background
+      cursorBgColor: *cyan # Doesn't seem to change, assume it's the selection foreground
+      markColor: *orange # wat do?
+      header:
+        fgColor: *foreground
+        bgColor: *background
+        sorterColor: *cyan
+    charts:
+      bgColor: *background
+      defaultDialColors:
+        - *magenta
+        - *red
+      defaultChartColors:
+        - *magenta
+        - *red
+    xray:
+      fgColor: *foreground
+      bgColor: *background
+      cursorColor: *selection
+      graphicColor: *magenta
+      showIcons: false
+    yaml:
+      keyColor: *nord7
+      colonColor: *foreground
+      valueColor: *foreground
+    logs:
+      fgColor: *foreground
+      bgColor: *background
+      indicator:
+        fgColor: *foreground
+        bgColor: *magenta
+  dialog:
+    fgColor: *foreground
+    bgColor: *nord1
+    buttonFgColor: *foreground
+    buttonBgColor: *background
+    buttonFocusFgColor: *foreground
+    buttonFocusBgColor: *nord7
+    labelFgColor: *cyan
+    fieldFgColor: *foreground

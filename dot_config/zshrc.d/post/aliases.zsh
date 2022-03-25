@@ -1,6 +1,7 @@
 # General
-alias r='cd ~/dev/figure/$(ls ~/dev/figure | fzf)'
+# alias r='cd ~/dev/figure/$(ls ~/dev/figure | sort -r | fzf --exact -1 -0 --ansi --query "$1")'
 alias c="clear"
+alias cobra="cobra-cli"
 alias ch="chezmoi"
 alias gw="./gradlew"
 alias l="exa -alhB --ignore-glob=\".DS_Store\" --group-directories-first -s=name"
@@ -14,22 +15,19 @@ alias y="yarn"
 alias zc="lvim ~/.zshrc"
 alias zs="source ~/.zshrc"
 
+# Brew
+alias bop="brew update && brew outdated && brew upgrade && brew upgrade --cask --greedy && brew upgrade --formula && brew cleanup"
+
 # Git
-alias gpd="git co develop && git pull && git co -"
-alias gmd="gpd && git merge develop"
-alias grd="gpd && git rebase develop"
 
-alias gpm="git co main && git pull && git co -"
-alias gmm="gpm && git merge main"
-alias grm="gpm && git rebase main"
+## Git rebase develop
+alias grbod='git rebase origin/"$(git_develop_branch)"'
 
-alias gpms="git co master && git pull && git co -"
-alias gmms="gpms && git merge master"
-alias grms="gpms && git rebase master"
+## Git merge develop
+alias gmod='git merge origin/"$(git_develop_branch)"'
 
-alias gp="git push"
-alias gpl="git pull"
-alias gpf="git push --force-with-lease"
+alias ga.="ga ."
+alias gac="ga . && gc"
 alias gpu="git pu"
 alias gs="git s"
 
@@ -47,6 +45,11 @@ alias ldbenv='eval "$(dbenv local)"'
 alias udbenv='eval "$(dbenv unset)"'
 
 # cht.sh
-cht() {
+function cht() {
   curl cht.sh/"$1"/${2// /+}
+}
+
+function r() {
+  repos="$HOME/dev/figure/"
+  cd $repos/$(ls $repos | sort -r | fzf --exact -1 -0 --ansi --query "$1")
 }
