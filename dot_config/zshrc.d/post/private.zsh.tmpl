@@ -4,7 +4,7 @@
 export NEXUS_USER={{ $nexusUser | quote }}
 export NEXUS_PASS={{ $nexusPass | quote }}
 export NEXUS_HOST="nexus.figure.com"
-export NEXUS_NPM_TOKEN=$(echo -n $nexusUser:$nexusPass | openssl base64)
+export NEXUS_NPM_TOKEN=$(echo -n {{ $nexusUser }}:{{ $nexusPass }} | openssl base64)
 
 ## Github Token
 {{ $terminalGithubToken := (onepasswordDetailsFields "Terminal Github Token").password.value -}}

@@ -18,6 +18,7 @@ alias zs="source ~/.zshrc"
 
 # Brew
 alias bop="brew update && brew outdated && brew upgrade && brew upgrade --cask --greedy && brew upgrade --formula && brew cleanup"
+unalias buf
 
 # Git
 
