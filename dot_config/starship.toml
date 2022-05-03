@@ -8,6 +8,7 @@ $git_state\
 $git_metrics\
 $git_status\
 $docker_context\
+$custom\
 $package\
 $deno\
 $helm\
@@ -22,7 +23,6 @@ $vagrant\
 $nix_shell\
 $memory_usage\
 $env_var\
-$custom\
 $line_break\
 $time\
 $status\
@@ -40,4 +40,12 @@ error_symbol = "[➜](bold red)"
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
+
+[custom.latest-release]
+description = "Show latest git tag"
+command = "git tag --sort=committerdate | tail -1"
+style = "bold cyan"
+symbol = "📦 "
+when = """[ "$(git tag --sort=committerdate | tail -1)" != "" ]"""
+format = "is [$symbol($output)]($style) "
 
