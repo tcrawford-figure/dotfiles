@@ -1,20 +1,34 @@
 # General
 # alias r='cd ~/dev/figure/$(ls ~/dev/figure | sort -r | fzf --exact -1 -0 --ansi --query "$1")'
 alias c="clear"
-alias cobra="cobra-cli"
 alias ch="chezmoi"
+alias cobra="cobra-cli"
 alias gw="./gradlew"
 alias l="exa -alhB --ignore-glob=\".DS_Store\" --group-directories-first -s=name"
+alias ld="./scripts/local-down.sh"
+alias ldbi="./scripts/local-dbinit.sh"
+alias lu="./scripts/local-up.sh"
 alias n="npm"
 alias nukebin="find . -type d -name \"bin\" -exec rm -rf {} \\;"
 alias nukeds="find ./ -type f | grep .DS_Store | xargs rm"
 alias o.="open ."
+alias pf="./scripts/port-forward.sh"
 alias sc="lvim ~/.config/starship.toml"
+alias slurp="./scripts/slurp-app.sh $@"
 alias v="lvim"
 alias weather="curl wttr.in"
 alias y="yarn"
 alias zc="lvim ~/.zshrc"
 alias zs="source ~/.zshrc"
+
+# act command override
+act () { env DOCKER_HOST="$(docker context inspect -f '{{.Endpoints.docker.Host}}')" /usr/local/bin/act $*}
+
+# mmdc - needs function to fetch pwd properly
+# alias mmdc="docker run -it -v $(pwd):/data minlag/mermaid-cli $@"
+function mmdc() { 
+  docker run -it -v $(pwd):/data minlag/mermaid-cli $@
+}
 
 # Brew
 alias bop="brew update && brew outdated && brew upgrade && brew upgrade --cask --greedy && brew upgrade --formula && brew cleanup"

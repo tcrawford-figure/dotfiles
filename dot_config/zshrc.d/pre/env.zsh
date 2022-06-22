@@ -15,3 +15,4 @@ export EDITOR=$VISUAL
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
