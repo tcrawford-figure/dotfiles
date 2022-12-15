@@ -10,11 +10,13 @@ alias ldc="./dc.sh"
 alias ldbi="./scripts/local-dbinit.sh"
 alias lu="./scripts/local-up.sh"
 alias n="npm"
-alias nukebin="find . -type d -name \"bin\" | xargs rm -rf"
-alias nukeds="find ./ -type f | grep .DS_Store | xargs rm"
+alias nv="nvim"
+alias nukebin="fd -t d bin --exec rm -rf"
+alias nukeds="fd -t f -H .DS_Store --exec rm"
 alias o.="open ."
 alias pf="./scripts/port-forward.sh"
 alias sc="lvim ~/.config/starship.toml"
+alias sk="skaffold"
 alias slurp="./scripts/slurp-app.sh $@"
 alias v="lvim"
 alias weather="curl wttr.in"
@@ -37,6 +39,9 @@ unalias buf
 
 # Git
 
+unalias gbr
+unalias gco
+
 ## Git rebase develop
 alias grbod='git rebase origin/"$(git_develop_branch)"'
 
@@ -45,8 +50,17 @@ alias gmod='git merge origin/"$(git_develop_branch)"'
 
 alias ga.="ga ."
 alias gac="ga . && gc"
+alias gbr="git br"
 alias gpu="git pu"
 alias gs="git s"
+
+function gcbt() {
+  gcb "tylercrawford/sc-$1/$2"
+}
+
+function gco () {
+  git checkout $(git branch --all | fzf --exact -1 -0 --ansi --query "$1" | tr -d '*[:space:]')
+}
 
 # K8s 
 alias k="kubectl"
