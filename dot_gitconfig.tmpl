@@ -4,7 +4,7 @@
 [alias]
   a = !./gradlew ktlintFormat && git add .  
   amend = commit --amend
-  br = branch
+  br = !git --no-pager branch
   branches = branch -avv
   clp = !git clean -n
   co = checkout
