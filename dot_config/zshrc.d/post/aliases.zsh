@@ -18,6 +18,7 @@ alias pf="./scripts/port-forward.sh"
 alias sc="lvim ~/.config/starship.toml"
 alias sk="skaffold"
 alias slurp="./scripts/slurp-app.sh $@"
+alias tf="terraform"
 alias v="lvim"
 alias weather="curl wttr.in"
 alias y="yarn"
@@ -35,7 +36,7 @@ function mmdc() {
 
 # Brew
 alias bop="brew update && brew outdated && brew upgrade && brew upgrade --cask --greedy && brew upgrade --formula && brew cleanup"
-unalias buf
+# unalias buf
 
 # Git
 

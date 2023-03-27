@@ -49,11 +49,11 @@ symbol = "📦 "
 when = """[ "$(git tag --sort=committerdate | tail -1)" != "" ]"""
 format = "is [$symbol($output)]($style) "
 
-[custom.gradlew-version]
-description = "Show the current gradlew version"
-command = "rg -e 'gradle-.*' -No gradle/wrapper/gradle-wrapper.properties | awk -F- '{print $2}'"
-style = "bold cyan"
-symbol = "ﳄ "
-when = """[ "$(rg -e 'gradle-.*' -No gradle/wrapper/gradle-wrapper.properties | awk -F- '{print $2}')" != "" ]"""
-format = "via [$symbol($output)]($style) "
+# [custom.gradlew-version]
+# description = "Show the current gradlew version"
+# command = "rg -e 'gradle-.*' -No gradle/wrapper/gradle-wrapper.properties | awk -F- '{print $2}'"
+# style = "bold cyan"
+# symbol = "ﳄ "
+# when = """[ "$(rg -e 'gradle-.*' -No gradle/wrapper/gradle-wrapper.properties | awk -F- '{print $2}')" != "" ]"""
+# format = "via [$symbol($output)]($style) "
 
