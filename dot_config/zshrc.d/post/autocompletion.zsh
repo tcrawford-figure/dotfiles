@@ -7,8 +7,9 @@ fi
 
 eval "$(op completion zsh)"; compdef _op op
 
-autoload -Uz compinit
-compinit
+autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+complete -o nospace -C "$(which terraform)" terraform
 
 #compdef gt
 ###-begin-gt-completions-###

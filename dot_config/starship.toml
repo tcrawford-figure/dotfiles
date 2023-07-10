@@ -43,10 +43,13 @@ disabled = true
 
 [custom.latest-release]
 description = "Show latest git tag"
-command = "git tag --sort=committerdate | tail -1"
+# command = "git tag --sort=committerdate | tail -1"
+command = """git tag -l --sort=-v:refname | rg "v\\d.\\d.\\d" | head -1"""
 style = "bold blue"
 symbol = "📦 "
-when = """[ "$(git tag --sort=committerdate | tail -1)" != "" ]"""
+# g tag -l --sort=-v:refname | head -1
+# when = """[ "$(git tag --sort=committerdate | tail -1)" != "" ]"""
+when = """[ "$(git tag -l --sort=-v:refname | rg "v\\d.\\d.\\d" | head -1)" != "" ]"""
 format = "is [$symbol($output)]($style) "
 
 # [custom.gradlew-version]

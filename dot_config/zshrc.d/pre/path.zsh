@@ -2,6 +2,7 @@
 path=(
     $HOME/bin
     $HOME/.local/bin
+    $HOME/.docker/bin
     /usr/local/bin
     /usr/local/sbin
     /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
