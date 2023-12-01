@@ -17,6 +17,6 @@ export LANG=en_US.UTF-8
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE="/var/run/docker.sock"
-export DOCKER_HOST="unix:///Users/tylercrawford/.docker/run/docker.sock"
+# export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE="/var/run/docker.sock"
+# export DOCKER_HOST="unix:///Users/tylercrawford/.docker/run/docker.sock"
 

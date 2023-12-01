@@ -1,9 +1,11 @@
 # General
 alias c="clear"
+alias c.="code ."
 alias ch="chezmoi"
 alias cobra="cobra-cli"
+alias csp="cloud-sql-proxy"
 alias gw="./gradlew"
-alias l="exa -alhB --ignore-glob=\".DS_Store\" --group-directories-first -s=name"
+alias l="eza -alhB --ignore-glob=\".DS_Store\" --group-directories-first -s=name"
 alias ld="./scripts/local-down.sh"
 alias ldc="./dc.sh"
 alias ldbi="./scripts/local-dbinit.sh"
@@ -12,6 +14,7 @@ alias n="npm"
 alias nv="nvim"
 alias nukebin="fd -t d bin --exec rm -rf"
 alias nukeds="fd -t f -H .DS_Store --exec rm"
+alias nukebuild="fd -t d build --exec rm -rf"
 alias o.="open ."
 alias pf="./scripts/port-forward.sh"
 alias sc="lvim ~/.config/starship.toml"
@@ -22,6 +25,7 @@ alias v="lvim"
 alias weather="curl wttr.in"
 alias y="yarn"
 alias zc="lvim ~/.zshrc"
+alias zca="lvim ~/.config/zshrc.d/post/aliases.zsh"
 alias ze="lvim ~/.config/zshrc.d"
 alias zs="source ~/.zshrc"
 
@@ -35,7 +39,16 @@ function mmdc() {
 }
 
 # Brew
-alias bop="brew update && brew outdated && brew upgrade && brew upgrade --cask --greedy && brew upgrade --formula && brew cleanup"
+fun bop() {
+  brew update
+  brew outdated
+  brew upgrade
+  brew upgrade --cask --greedy
+  brew upgrade --formula
+  brew cleanup
+  brew autoremove
+}
+# alias bop="brew update && brew outdated && brew upgrade && brew upgrade --cask --greedy && brew upgrade --formula && brew cleanup && brew autoremove"
 # unalias buf
 
 # Git
@@ -57,6 +70,8 @@ alias gco-="git checkout -"
 alias gpu="git pu"
 alias gs="git s"
 alias gg="git gone"
+
+alias gce="git commit --allow-empty -m \"Empty commit\""
 
 function gcbt() {
   gcb "tylercrawford/sc-$1/$2"
@@ -87,4 +102,40 @@ function cht() {
 function r() {
   repos="$HOME/dev/figure/"
   cd $repos/$(ls $repos | sort -r | fzf --exact -1 -0 --ansi --query "$1")
+}
+
+function ra() {
+  # Specify the target directory
+  target_dir="$HOME/dev"
+
+  # Initialize an empty array to store ls results with relative paths
+  result=()
+
+  # Change to the target directory
+  cd "$target_dir" || exit
+
+  # Iterate through directories in the target directory
+  for dir in */; do
+      # Run ls on each directory, prepend $dir to each result, and append to the array
+      while IFS= read -r line; do
+          result+=("$dir$line")
+      done < <(ls "$dir")
+  done
+
+  # Sort the result array in reverse order
+  sorted_result=($(printf "%s\n" "${result[@]}" | sort -r))
+
+  # Use fzf for interactive selection
+  selected=$(printf '%s\n' "${sorted_result[@]}" | fzf --exact -1 -0 --ansi --query="$1")
+
+  # Change directory to the selected directory (relative to target_dir)
+  cd "$target_dir/$selected" || exit
+}
+
+function tfb() {
+  tfswitch 
+  terraform init -upgrade
+  terraform providers lock -platform=linux_amd64 -platform=darwin_amd64 -platform=darwin_arm64
+  terraform fmt
+  terraform validate
 }
