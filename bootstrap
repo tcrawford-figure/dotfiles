@@ -10,7 +10,7 @@ else
 fi
 
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> $HOME/.zprofile
-eval "$(/opt/hombrew/bin/brew shellenv)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 exec $SHELL
 
