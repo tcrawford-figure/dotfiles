@@ -19,6 +19,7 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-completions
+  git-extra-commands
 )
 
 # Source oh-my-zsh into existence

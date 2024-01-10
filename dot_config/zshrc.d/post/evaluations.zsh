@@ -1,2 +1,2 @@
-eval $(starship init zsh)
-eval "$(rtx activate zsh)"
+eval "$(starship init zsh)"
+eval "$(mise activate zsh)"
