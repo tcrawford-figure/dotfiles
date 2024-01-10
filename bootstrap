@@ -9,6 +9,9 @@ else
     echo "Homebrew is already installed."
 fi
 
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> $HOME/.zprofile
+eval "$(/opt/hombrew/bin/brew shellenv)"
+
 # Check if Git is installed
 if ! command -v git &> /dev/null; then
     echo "Git is not installed. Installing..."
