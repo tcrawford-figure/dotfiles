@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null; then
+    echo "Homebrew is not installed. Installing..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    [ $? -eq 0 ] || { echo "Error: Homebrew installation failed."; exit 1; }
+else
+    echo "Homebrew is already installed."
+fi
+
+# Check if Git is installed
+if ! command -v git &> /dev/null; then
+    echo "Git is not installed. Installing..."
+    brew install git
+    [ $? -eq 0 ] || { echo "Error: Git installation failed."; exit 1; }
+else
+    echo "Git is already installed."
+fi
+
+# Configure Git if not already configured
+if [ -z "$(git config --get user.name)" ]; then
+    git config --global user.name "Tyler Crawford"
+fi
+
+if [ -z "$(git config --get user.email)" ]; then
+    git config --global user.email "tcrawford@figure.com"
+fi
+
+echo "Git configuration completed."
+
+# Install chezmoi and 1password-cli via Homebrew
+echo "Installing chezmoi and 1password-cli..."
+brew install chezmoi 1password-cli
+
+chezmoi init --apply https://github.com/tcrawford-figure/dotfiles
+
+echo "Installation completed successfully."
+
