@@ -16,11 +16,15 @@ plugins=(
   git
   gh
   brew
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  zsh-completions
+  terraform
+  fd
+  fzf
   git-extra-commands
 )
 
 # Source oh-my-zsh into existence
 source $ZSH/oh-my-zsh.sh
+
+# Requires brew install zsh-autosuggestions zsh-syntax-highlighting
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

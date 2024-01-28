@@ -18,3 +18,4 @@ if [[ -d $HOME/.config/zshrc.d/post ]]; then
     source $file
   done
 fi
+
