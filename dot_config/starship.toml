@@ -8,10 +8,9 @@ $git_state\
 $git_metrics\
 $git_status\
 $docker_context\
-$custom\
+${custom.latest-release}\
 $package\
-$deno\
-$gradle\
+${custom.gradlew-version}\
 $lua\
 $nodejs\
 $python\
@@ -28,6 +27,8 @@ $status\
 $shell\
 $character
 """
+
+# $gradle <- put this in the above if needed
 
 # Inserts a blank line between shell prompts
 add_newline = true
@@ -46,17 +47,17 @@ description = "Show latest git tag"
 # command = "git tag --sort=committerdate | tail -1"
 command = """git tag -l --sort=-v:refname | rg "^v\\d+.\\d+.\\d+$" | head -1"""
 style = "bold blue"
-symbol = "📦 "
+symbol = "\uf02c"
 # g tag -l --sort=-v:refname | head -1
 # when = """[ "$(git tag --sort=committerdate | tail -1)" != "" ]"""
 when = """[ "$(git tag -l --sort=-v:refname | rg "^v\\d+.\\d+.\\d+$" | head -1)" != "" ]"""
-format = "is [$symbol($output)]($style) "
+format = "at [$symbol ($output)]($style) "
 
-# [custom.gradlew-version]
-# description = "Show the current gradlew version"
-# command = "rg -e 'gradle-.*' -No gradle/wrapper/gradle-wrapper.properties | awk -F- '{print $2}'"
-# style = "bold cyan"
-# symbol = "ﳄ "
-# when = """[ "$(rg -e 'gradle-.*' -No gradle/wrapper/gradle-wrapper.properties | awk -F- '{print $2}')" != "" ]"""
-# format = "via [$symbol($output)]($style) "
+[custom.gradlew-version]
+description = "Show the current gradlew version"
+command = "rg -e 'gradle-.*' -No gradle/wrapper/gradle-wrapper.properties | awk -F- '{print $2}'"
+style = "bold cyan"
+symbol = "\ue660"
+when = """[ "$(rg -e 'gradle-.*' -No gradle/wrapper/gradle-wrapper.properties | awk -F- '{print $2}')" != "" ]"""
+format = "using [$symbol v($output)]($style) "
 

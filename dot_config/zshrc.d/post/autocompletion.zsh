@@ -32,4 +32,4 @@ compdef _cdktf_yargs_completions cdktf
 ###-end-cdktf-completions-###
 
 source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-
+source <(jj util completion zsh)

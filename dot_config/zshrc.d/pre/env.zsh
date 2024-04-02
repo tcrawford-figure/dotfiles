@@ -5,9 +5,9 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 # Go Paths
-#export GOPATH=$(go env GOPATH)
-#export GOBIN="$(go env GOPATH)/bin"
-#export GOROOT=$(go env GOROOT)
+export GOPATH=$(go env GOPATH)
+export GOBIN="$(go env GOPATH)/bin"
+export GOROOT=$(go env GOROOT)
 
 export VISUAL=lvim
 export EDITOR=$VISUAL

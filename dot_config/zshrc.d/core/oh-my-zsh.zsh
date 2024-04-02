@@ -15,6 +15,7 @@ plugins=(
   aliases
   git
   gh
+  golang
   brew
   terraform
   fd

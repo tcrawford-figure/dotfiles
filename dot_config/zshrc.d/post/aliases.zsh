@@ -1,4 +1,5 @@
 # General
+alias b="bat"
 alias c="clear"
 alias c.="code ."
 alias ch="chezmoi"
@@ -6,6 +7,7 @@ alias cobra="cobra-cli"
 alias csp="cloud-sql-proxy"
 alias dtf="dependency-tree-diff"
 alias gw="./gradlew"
+alias j="just"
 alias l="eza -alhB --ignore-glob=\".DS_Store\" --group-directories-first -s=name"
 alias ld="./scripts/local-down.sh"
 alias ldc="./dc.sh"
@@ -18,29 +20,29 @@ alias nukeds="fd -t f -H .DS_Store --exec rm"
 alias nukebuild="fd -t d build --exec rm -rf"
 alias o.="open ."
 alias pf="./scripts/port-forward.sh"
+alias pip="pip3"
+alias python="python3"
 alias sc="lvim ~/.config/starship.toml"
 alias sk="skaffold"
 alias slurp="./scripts/slurp-app.sh $@"
 alias tf="terraform"
 alias v="lvim"
-alias weather="curl wttr.in"
 alias y="yarn"
 alias zc="lvim ~/.zshrc"
 alias zca="lvim ~/.config/zshrc.d/post/aliases.zsh"
 alias ze="lvim ~/.config/zshrc.d"
 alias zs="source ~/.zshrc"
 
-# act command override
-act () { env DOCKER_HOST="$(docker context inspect -f '{{.Endpoints.docker.Host}}')" /usr/local/bin/act $*}
-
-# mmdc - needs function to fetch pwd properly
-# alias mmdc="docker run -it -v $(pwd):/data minlag/mermaid-cli $@"
-function mmdc() { 
-  docker run -it -v $(pwd):/data minlag/mermaid-cli $@
-}
+# just
+alias jb="just build"
+alias jbo="just bounce"
+alias jp="just provision"
+alias jpl="just pull"
+alias jr="just run"
+alias js="just stop"
 
 # Brew
-fun bop() {
+function bop() {
   brew update
   brew outdated
   brew upgrade
@@ -49,8 +51,6 @@ fun bop() {
   brew cleanup
   brew autoremove
 }
-# alias bop="brew update && brew outdated && brew upgrade && brew upgrade --cask --greedy && brew upgrade --formula && brew cleanup && brew autoremove"
-# unalias buf
 
 # Git
 
@@ -68,6 +68,7 @@ alias ga.="ga ."
 alias gac="ga . && gc"
 alias gbr="git br"
 alias gco-="git checkout -"
+alias gcom="git checkout origin/main"
 alias gpu="git pu"
 alias gs="git s"
 alias gg="git gone"
@@ -75,7 +76,7 @@ alias gg="git gone"
 alias gce="git commit --allow-empty -m \"Empty commit\""
 
 function gcbt() {
-  gcb "tylercrawford/sc-$1/$2"
+  gcb "tcrawford/sc-$1/$2"
 }
 
 function gco () {
@@ -88,12 +89,6 @@ alias kc="kubectx"
 alias kn="kubens"
 alias kt="kc test"
 alias kp="kc prod"
-
-# dbenv
-alias pdbenv='eval "$(dbenv prod)"'
-alias tdbenv='eval "$(dbenv test)"'
-alias ldbenv='eval "$(dbenv local)"'
-alias udbenv='eval "$(dbenv unset)"'
 
 # cht.sh
 function cht() {
