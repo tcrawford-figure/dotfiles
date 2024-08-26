@@ -10,6 +10,7 @@ path=(
     $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin
     /usr/local/opt/openjdk@11/bin
     $HOME/dev/scripts/helper-scripts/bin
+    "${KREW_ROOT:-$HOME/.krew}/bin"
     $path
 )
 

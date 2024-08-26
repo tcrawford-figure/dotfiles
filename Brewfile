@@ -116,7 +116,7 @@ cask "iterm2"
 cask "jetbrains-toolbox"
 cask "keycastr"
 cask "kube-forwarder"
-cask "librewolf", args: { no_quarantine: true }
+cask "librewolf"
 cask "microsoft-edge"
 cask "notion"
 cask "openvpn-connect"

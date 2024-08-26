@@ -1,3 +1,10 @@
+# Unalias stuff that I want
+unalias gbr
+unalias gco
+unalias gg
+unalias gsd
+unalias tff
+
 # General
 alias b="bat"
 alias c="clear"
@@ -6,6 +13,7 @@ alias ch="chezmoi"
 alias cobra="cobra-cli"
 alias csp="cloud-sql-proxy"
 alias dtf="dependency-tree-diff"
+alias glogin="gcloud auth login --update-adc"
 alias gw="./gradlew"
 alias j="just"
 alias l="eza -alhB --ignore-glob=\".DS_Store\" --group-directories-first -s=name"
@@ -13,6 +21,8 @@ alias ld="./scripts/local-down.sh"
 alias ldc="./dc.sh"
 alias ldbi="./scripts/local-dbinit.sh"
 alias lu="./scripts/local-up.sh"
+alias mtf="./multf"
+alias mx="mise"
 alias n="npm"
 alias nv="nvim"
 alias nukebin="fd -t d bin --exec rm -rf"
@@ -26,7 +36,10 @@ alias sc="lvim ~/.config/starship.toml"
 alias sk="skaffold"
 alias slurp="./scripts/slurp-app.sh $@"
 alias tf="terraform"
+alias tff="fd --extension tf --extension tfvars -x terraform fmt"
+alias tfg="terraform get -update"
 alias v="lvim"
+alias x="gh copilot"
 alias y="yarn"
 alias zc="lvim ~/.zshrc"
 alias zca="lvim ~/.config/zshrc.d/post/aliases.zsh"
@@ -36,10 +49,15 @@ alias zs="source ~/.zshrc"
 # just
 alias jb="just build"
 alias jbo="just bounce"
-alias jp="just provision"
-alias jpl="just pull"
+alias jp="just pull"
 alias jr="just run"
 alias js="just stop"
+alias jue="just up -e"
+alias ju="just up"
+
+alias tg="terragrunt"
+alias tgf="terragrunt hclfmt"
+alias tgp="terragrunt run-all plan"
 
 # Brew
 function bop() {
@@ -54,10 +72,6 @@ function bop() {
 
 # Git
 
-unalias gbr
-unalias gco
-unalias gg
-
 ## Git rebase develop
 alias grbod='git rebase origin/"$(git_develop_branch)"'
 
@@ -71,6 +85,7 @@ alias gco-="git checkout -"
 alias gcom="git checkout origin/main"
 alias gpu="git pu"
 alias gs="git s"
+alias gsd="git stash drop"
 alias gg="git gone"
 
 alias gce="git commit --allow-empty -m \"Empty commit\""
@@ -80,7 +95,7 @@ function gcbt() {
 }
 
 function gco () {
-  git checkout $(git branch --all | fzf --exact -1 -0 --ansi --query "$1" | tr -d '*[:space:]')
+  git checkout $(git branch --all | fzf --exact -1 -0 --ansi --query "$1" | sed 's/remotes\/origin\///' | tr -d '*[:space:]')
 }
 
 # K8s 
@@ -129,9 +144,13 @@ function ra() {
 }
 
 function tfb() {
-  tfswitch 
+  # tfswitch 
+  mise i
   terraform init -upgrade
   terraform providers lock -platform=linux_amd64 -platform=darwin_amd64 -platform=darwin_arm64
   terraform fmt
+  tfsort variables.tf
+  tfsort outputs.tf
+  trivy config .
   terraform validate
 }

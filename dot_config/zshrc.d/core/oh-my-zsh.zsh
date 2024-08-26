@@ -18,7 +18,6 @@ plugins=(
   golang
   brew
   terraform
-  fd
   fzf
   git-extra-commands
 )

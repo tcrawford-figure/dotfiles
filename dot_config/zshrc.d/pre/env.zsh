@@ -23,3 +23,9 @@ export ANDROID_HOME="/usr/local/share/android-commandlinetools"
 
 export BAT_THEME="Nord"
 
+export ARGOCD_OPTS="--grpc-web"
+
+export DOCKER_DEFAULT_PLATFORM="linux/arm64"
+
+export ASDF_HASHICORP_TERRAFORM_VERSION_FILE="versions.tf"
+
