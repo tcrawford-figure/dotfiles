@@ -1,47 +1,83 @@
-set number                        " line numbers
+let mapleader=" "
 
-set hlsearch                      " highlight search occurrences
-set ignorecase                    " ignore case in search patterns
-set smartcase                     " no ignore case when pattern is uppercase
-set incsearch                     " show search results while typing
-set wrapscan                      " searches wrap around the end of the file
+""" ---------------------------------------------------------------------------
+""" General -------------------------------------------------------------------
+""" ---------------------------------------------------------------------------
 
-set gdefault                      " substitute all occurrences in line per default
-set history=10000                 " keep x lines of command line history
-set scrolloff=5 sidescrolloff=10  " keep some lines before and after the cursor visible
 set clipboard=unnamedplus,unnamed,ideaput " integrate with system clipboard
+set gdefault                              " substitute all occurrences in line per default
+set history=10000                         " keep x lines of command line history
+set hlsearch                              " highlight search occurrences
+set ignorecase                            " ignore case in search patterns
+set incsearch                             " show search results while typing
+set relativenumber                        " relative line numbers
+set scrolloff=5 sidescrolloff=10          " keep some lines before and after the cursor visible
+set smartcase                             " no ignore case when pattern is uppercase
+set wrapscan                              " searches wrap around the end of the file
+set ideajoin                              " Enables the join lines action to behave like IntelliJ's join lines action
 
-" https://github.com/JetBrains/ideavim/wiki/%22set%22-commands
-set multiple-cursors
-set commentary
-set surround                      " emulate vim-surround plugin
-set ideajoin
-set NERDTree
+""" ---------------------------------------------------------------------------
+""" Mappings ------------------------------------------------------------------
+""" ---------------------------------------------------------------------------
 
-" set <leader> to <space>
-let mapleader = " "
-
+""" General mappings ----------------------------------------------------------
 " edit ideavim config
 nnoremap <leader>vv :e ~/.ideavimrc<CR>
 nnoremap <leader>vr :source ~/.ideavimrc<CR>
 
-vmap s S
-
-" NERDTree
-nnoremap <leader>e :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-
-" Comment shit
-nnoremap <leader>/ :Commentary<CR>
-vnoremap <leader>/ :Commentary<CR>
-
 " Indent highlighted text in visual mode
 vnoremap > >gv
-
 " Unindent highlighted text in visual mode
 vnoremap < <gv
+
+" Remap arrow keys to Ctrl + h, Ctrl + j, Ctrl + k, Ctrl + l in insert mode
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
+" Switch to the pane/window/buffer to the right
+nnoremap <C-l> <C-w>l
+
+" Switch to the pane/window/buffer to the left
+nnoremap <C-h> <C-w>h
+
+""" IDEA mappings -------------------------------------------------------------
+map <Leader>z <Action>(ToggleDistractionFreeMode)
+map <Leader><Leader> <Action>(Find)
+map <Leader>t <Action>(FindSelectionInPath)
+
+" Map Ctrl+j to move down in action menus
+map <C-j> <Down>
+
+" Map Ctrl+k to move up in action menus
+map <C-k> <Up>
+
+
+
+""" ---------------------------------------------------------------------------
+""" Plugins -------------------------------------------------------------------
+""" ---------------------------------------------------------------------------
+
+Plug 'chrisbra/matchit'
+Plug 'dbakker/vim-paragraph-motion'
+Plug 'kana/vim-textobj-entire'
+
+""" Highlight yank ------------------------------------------------------------
+Plug 'machakann/vim-highlightedyank'
+
+let g:highlightedyank_highlight_color = 'rgba(76, 86, 106, 255)'
+
+"""
+Plug 'michaeljsmith/vim-indent-object'
+
+""" NERDtree support ----------------------------------------------------------
+Plug 'preservim/nerdtree'
+
+nnoremap <leader>e :NERDTreeFocus<CR>
+
+""" Multiple cursors (not to be confused with multicursor) --------------------
+Plug 'terryma/vim-multiple-cursors'
 
 " Remap multiple-cursors shortcuts to match terryma/vim-multiple-cursors
 nmap <C-n> <Plug>NextWholeOccurrence
@@ -59,31 +95,56 @@ xmap <leader><C-n> <Plug>AllWholeOccurrences
 nmap <leader>g<C-n> <Plug>AllOccurrences
 xmap <leader>g<C-n> <Plug>AllOccurrences
 
-" Remap arrow keys to Alt + h, Alt + j, Alt + k, Alt + l in insert mode
-inoremap <A-h> <Left>
-inoremap <A-j> <Down>
-inoremap <A-k> <Up>
-inoremap <A-l> <Right>
+""" TODO
+Plug 'tommcdo/vim-exchange'
 
-" .ideavimrc is a configuration file for IdeaVim plugin. It uses
-"   the same commands as the original .vimrc configuration.
-" You can find a list of commands here: https://jb.gg/h38q75
-" Find more examples here: https://jb.gg/share-ideavimrc
+""" (Un)comment ---------------------------------------------------------------
+Plug 'tpope/vim-commentary'
 
-" Don't use Ex mode, use Q for formatting.
-map Q gq
+nnoremap <leader>/ :Commentary<CR>
+vnoremap <leader>/ :Commentary<CR>
 
-" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+""" Surround text -------------------------------------------------------------
+Plug 'tpope/vim-surround'
 
-" Highlight copied text
-Plug 'machakann/vim-highlightedyank'
+""" Replace instead of copy-paste ---------------------------------------------
+Plug 'vim-scripts/ReplaceWithRegister'
 
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-"" Map \r to the Reformat Code action
-"map \r <Action>(ReformatCode)
+""" Work with function arguments ----------------------------------------------
+Plug 'vim-scripts/argtextobj.vim'
 
-"" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
 
-"" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
+""" ---------------------------------------------------------------------------
+""" Plugins requiring IDEA Plugins --------------------------------------------
+""" IDEA plugins must be installed first before enabling the following plugins
+""" ---------------------------------------------------------------------------
+
+""" Jump quickly through code -------------------------------------------------
+""" Requires IdeaVim-EasyMotion IDEA plugin
+set easymotion
+
+""" Quickly add multiple cursors (not to be confused with vim-multiple-cursors
+""" Requires VimMulticursor IDEA plugin
+set multicursor
+
+""" Jump to any location specified by two characters --------------------------
+""" Must come before quickscope
+set sneak
+
+""" Allows for easy forward/backward navigation on a line ---------------------
+""" Must come after sneak
+set quickscope
+
+""" Shows vim mappings as you type --------------------------------------------
+set which-key
+set notimeout
+
+" Styling
+let g:WhichKey_FontFamily = "Hack Nerd Font Propo"
+let g:WhichKey_FontSize = "14"
+let g:WhichKey_KeyColor = "88c0d0"
+let g:WhichKey_PrefixStyle = "bold"
+let g:WhichKey_PrefixColor = "b48ead"
+let g:WhichKey_CommandStyle = "bold"
+let g:WhichKey_CommandColor = "a3be8c"
+

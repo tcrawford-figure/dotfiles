@@ -3,20 +3,25 @@ unalias gbr
 unalias gco
 unalias gg
 unalias gsd
+unalias gpv
 unalias tff
 
 # General
+alias av="NVIM_APPNAME=avim nvim"
 alias b="bat"
 alias c="clear"
 alias c.="code ."
 alias ch="chezmoi"
 alias cobra="cobra-cli"
 alias csp="cloud-sql-proxy"
+alias cv="NVIM_APPNAME=cvim nvim"
 alias dtf="dependency-tree-diff"
 alias glogin="gcloud auth login --update-adc"
 alias gw="./gradlew"
 alias j="just"
+alias kv="NVIM_APPNAME=kvim nvim"
 alias l="eza -alhB --ignore-glob=\".DS_Store\" --group-directories-first -s=name"
+alias lz="NVIM_APPNAME=lazyvim nvim"
 alias ld="./scripts/local-down.sh"
 alias ldc="./dc.sh"
 alias ldbi="./scripts/local-dbinit.sh"
@@ -31,13 +36,14 @@ alias nukebuild="fd -t d build --exec rm -rf"
 alias o.="open ."
 alias pf="./scripts/port-forward.sh"
 alias pip="pip3"
+alias pc="pre-commit"
 alias python="python3"
 alias sc="lvim ~/.config/starship.toml"
 alias sk="skaffold"
 alias slurp="./scripts/slurp-app.sh $@"
 alias tf="terraform"
+alias tw="terraformw"
 alias tff="fd --extension tf --extension tfvars -x terraform fmt"
-alias tfg="terraform get -update"
 alias v="lvim"
 alias x="gh copilot"
 alias y="yarn"
@@ -84,6 +90,7 @@ alias gbr="git br"
 alias gco-="git checkout -"
 alias gcom="git checkout origin/main"
 alias gpu="git pu"
+alias gpv="git prune --verbose"
 alias gs="git s"
 alias gsd="git stash drop"
 alias gg="git gone"
@@ -149,8 +156,32 @@ function tfb() {
   terraform init -upgrade
   terraform providers lock -platform=linux_amd64 -platform=darwin_amd64 -platform=darwin_arm64
   terraform fmt
-  tfsort variables.tf
-  tfsort outputs.tf
+  [[ -f "variables.tf" ]] && tfsort variables.tf
+  [[ -f "outputs.tf" ]] && tfsort outputs.tf
   trivy config .
   terraform validate
+}
+
+function tfg() {
+  # Find all directories and store them in an array
+  mapfile -d '' directories < <(fd --type d --print0)
+
+  # Iterate over each directory
+  for dir in "${directories[@]}"; do
+    echo "$dir"
+    # Check if both files exist in the directory
+    if [[ -f "$dir/main.tf" && -f "$dir/versions.tf" ]]; then
+        cd "$dir" >/dev/null || exit
+
+        # Delete .terraform directory if it exists
+        if [[ -d ".terraform" ]]; then
+            rm -rf .terraform
+        fi
+
+        tfswitch
+        terraform get -update
+
+        cd - >/dev/null || exit
+    fi
+  done
 }
